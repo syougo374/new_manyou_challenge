@@ -15,23 +15,9 @@ ActiveRecord::Schema.define(version: 2021_04_30_043825) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "betweens", force: :cascade do |t|
-    t.integer "task_id"
-    t.integer "label_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "labels", force: :cascade do |t|
-    t.string "category"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "tasks", force: :cascade do |t|
     t.string "title"
     t.text "content"
-    t.date "due_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

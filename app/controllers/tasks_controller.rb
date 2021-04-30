@@ -1,11 +1,17 @@
 class TasksController < ApplicationController
   before_action :set_task, only:[:show,:edit,:update]
+  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
+
+  def index
+    @tasks = Task.all
+  end
+
   def new
     @task = Task.new
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
     if @task.save
       # @task = current_user.tasks.build(picture_params)
       redirect_to task_path(@task.id), notice: 'picture page was successfully created.'
@@ -34,9 +40,6 @@ class TasksController < ApplicationController
   end
 
   def edit
-  end
-
-  def index
   end
 
   private
