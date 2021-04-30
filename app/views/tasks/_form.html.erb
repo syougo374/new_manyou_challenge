@@ -1,0 +1,19 @@
+<%= form_with(model:@task, url:choose_new_or_edit, local:true) do |form| %>
+  <%= form.label :due_date %>
+  <br>
+  <%= form.text_field :due_date %>
+  <br>
+  <%= form.label :title %>
+  <br>
+  <%= form.text_field :title %>
+  <br>
+  <%= form.label :content %>
+  <br>
+  <%= form.text_field :content %>
+  <br>
+  <% if action_name == 'new' %>
+  <%= form.submit '投稿する' %>
+  <% else %>
+  <%= form.submit '更新する' %>
+  <% end %>
+<% end %>
