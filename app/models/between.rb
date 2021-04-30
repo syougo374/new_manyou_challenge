@@ -1,0 +1,2 @@
+class Between < ApplicationRecord
+end
