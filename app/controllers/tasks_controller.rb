@@ -11,7 +11,8 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = current_user.tasks.build(task_params)
+    # @task = current_user.tasks.build(task_params)
+    @task = Task.new(task_params)
     if @task.save
       # @task = current_user.tasks.build(picture_params)
       redirect_to task_path(@task.id), notice: 'picture page was successfully created.'
@@ -20,10 +21,10 @@ class TasksController < ApplicationController
     end
   end
 
-  def confirm
-    @task = current_user.tasks.build(task_params)
-    render :new if @task.invalid?  
-  end
+  # def confirm
+  #   @task = current_user.tasks.build(task_params)
+  #   render :new if @task.invalid?  
+  # end
   def update
     if @task.update(task_params)
       redirect_to tasks_path ,notice:'イベントを更新しまいた'
