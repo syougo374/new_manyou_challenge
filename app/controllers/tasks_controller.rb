@@ -1,9 +1,11 @@
 class TasksController < ApplicationController
-  before_action :set_task, only:[:show,:edit,:update]
-  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
+  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  # before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def index
     @tasks = Task.all
+    
+
   end
 
   def new
@@ -15,7 +17,7 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     if @task.save
       # @task = current_user.tasks.build(picture_params)
-      redirect_to task_path(@task.id), notice: 'picture page was successfully created.'
+      redirect_to tasks_path, notice: 'タスクを投稿しました'
     else
       render :new
     end
@@ -26,18 +28,22 @@ class TasksController < ApplicationController
   #   render :new if @task.invalid?  
   # end
   def update
-    if @task.update(task_params)
-      redirect_to tasks_path ,notice:'イベントを更新しまいた'
+    @task = Task.find(params[:id])
+    if @task.update_attributes(task_params)
+      flash[:success] = "タスクを更新しました"
+      redirect_to task_path(@task.id)
     else
       render :edit
     end
   end
 
   def destroy
+    @task.destroy
+    redirect_to tasks_path, notice: 'タスクを削除しました'
   end
 
   def show
-
+    
   end
 
   def edit
