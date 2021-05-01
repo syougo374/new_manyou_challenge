@@ -28,10 +28,9 @@ class TasksController < ApplicationController
   #   render :new if @task.invalid?  
   # end
   def update
-    @task = Task.find(params[:id])
     if @task.update_attributes(task_params)
       flash[:success] = "タスクを更新しました"
-      redirect_to task_path(@task.id)
+      redirect_to tasks_path
     else
       render :edit
     end
