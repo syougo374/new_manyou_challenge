@@ -1,0 +1,19 @@
+<h1>タスク一覧</h1>
+<table>
+  <thead>
+    <th>タイトル</th>
+    <th>内容</th>
+  </thead>
+  <tbody>
+    <% @tasks.each do |form| %>
+        <tr>
+          <td><%= form.title %></td>
+          <td><%= form.content %></td>
+          <td><%= link_to '詳細', task_path(form.id) %></td>
+          <td><%= link_to 'Edit', edit_task_path(form.id) %></td>
+          <td><%= link_to 'Destroy', task_path(form.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to 'タスクを追加する', new_task_path %>
