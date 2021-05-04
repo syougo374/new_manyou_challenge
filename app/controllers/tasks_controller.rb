@@ -53,7 +53,7 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
   end
   def task_params
-    params.require(:task).permit(:title,:content)
+    params.require(:task).permit(:title,:content,:daytime)
   end
 
 end

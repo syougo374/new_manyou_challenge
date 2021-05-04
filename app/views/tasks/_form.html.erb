@@ -1,7 +1,17 @@
 <%= form_with(model:@task, local:true) do |form| %>
-  <%= form.label :due_date %>
+  <% if @task.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@task.errors.count, "error") %> prohibited this <%= @task.daytime %> from being saved:</h2>
+    <ul>
+    <% @task.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+  <%= form.label :daytime %>
   <br>
-  <%= form.text_field :due_date %>
+  <%= form.date_field :daytime %>
   <br>
   <%= form.label :title %>
   <br>
