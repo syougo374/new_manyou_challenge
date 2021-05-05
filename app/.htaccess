@@ -1,4 +1,0 @@
-AuthType Basic
-AuthName “sample”
-AuthUserFile /Users/syougo/workspace/manyou_challenge/app/.htpasswd
-require valid-user
