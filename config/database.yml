@@ -83,3 +83,7 @@ production:
   database: manyou_challenge_production
   username: manyou_challenge
   password: <%= ENV['MANYOU_CHALLENGE_DATABASE_PASSWORD'] %>
+  
+  adapter: postgresql
+  database: db/production.postgresql
+  url: <%= ENV['DATABASE_URL'] %>
