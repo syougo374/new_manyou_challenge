@@ -26,6 +26,8 @@
   <%= form.datetime_field :endtime_at, value: Time.zone.now %>
   <%#= form.datetime_select :endtime_at %>
   <br>
+  <%= form.select :factory, [["未着手"],["着手中"],["完了"]],include_blank: "選択してください" %>
+  <br>
   <% if action_name == 'new' %>
   <%= form.submit '投稿する' %>
   <% else %>
