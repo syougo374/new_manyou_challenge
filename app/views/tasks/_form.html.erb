@@ -21,6 +21,11 @@
   <br>
   <%= form.text_field :content %>
   <br>
+  <%= form.label :期限 %>
+  <br>
+  <%= form.datetime_field :endtime_at, value: Time.zone.now %>
+  <%#= form.datetime_select :endtime_at %>
+  <br>
   <% if action_name == 'new' %>
   <%= form.submit '投稿する' %>
   <% else %>

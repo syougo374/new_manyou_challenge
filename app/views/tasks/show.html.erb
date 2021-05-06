@@ -1,7 +1,7 @@
 <h1>登録内容</h1>
+  <p>日時:<%= @task.daytime %></p>
   <p>タイトル:<%= @task.title %></p>
-  <br>
   <p>内容:<%= @task.content %></p>
-  <br>
+  <p>期限:<%= @task.endtime_at %></p>
 <%= link_to '編集', edit_task_path(@task) %>
 <%= link_to '戻る', tasks_path %>
