@@ -3,6 +3,6 @@
   <p>タイトル:<%= @task.title %></p>
   <p>内容:<%= @task.content %></p>
   <p>期限:<%= @task.endtime_at %></p>
-  <p>期限:<%= @task.factory %></p>
+  <p>期限:<%= @task.status %></p>
 <%= link_to '編集', edit_task_path(@task) %>
 <%= link_to '戻る', tasks_path %>

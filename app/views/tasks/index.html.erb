@@ -1,5 +1,15 @@
 <h1>タスク一覧</h1>
 <%= link_to '期限並び替え', tasks_path(sort_expired: "true") %>
+ <div class="search_box" >
+      <%= form_with(local: true, method: :get, url: tasks_path ) do |form| %>
+        <p class="input"><%= form.label :search_title, "タスク名" %>
+        <%= form.text_field :search_title, placeholder: "タスク名で検索" %></p>
+        <p class="input"><%= form.label :search_status, "ステータス" %>
+        <%= form.select :search_status, Task.statuses.keys, { include_blank: '選択してください'} %></p>
+        <p class="input"><%= form.submit "検索", name: "search" %></p>
+      <% end %>
+    </div>
+
 <table border = '1'>
   <thead>
     <th>日時</th>
@@ -12,6 +22,7 @@
     <th>削除</th>
   </thead>
   <tbody>
+  
     <% @tasks.each do |form| %>
         <tr class="task_row">
           <td><%= form.daytime %></td>
