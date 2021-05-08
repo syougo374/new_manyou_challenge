@@ -1,11 +1,14 @@
 <h1>タスク一覧</h1>
 <%= link_to '期限並び替え', tasks_path(sort_expired: "true") %>
+<%= link_to '優先順位で並び替え', tasks_path(sort_priority: "true") %>
  <div class="search_box" >
       <%= form_with(local: true, method: :get, url: tasks_path ) do |form| %>
         <p class="input"><%= form.label :search_title, "タスク名" %>
         <%= form.text_field :search_title, placeholder: "タスク名で検索" %></p>
         <p class="input"><%= form.label :search_status, "ステータス" %>
         <%= form.select :search_status, Task.statuses.keys, { include_blank: '選択してください'} %></p>
+        <p class="input"><%= form.label :search_priority, "優先順位" %>
+        <%= form.select :search_priority, Task.priorities.keys, { include_blank: '選択してください'} %></p>
         <p class="input"><%= form.submit "検索", name: "search" %></p>
       <% end %>
     </div>
@@ -17,6 +20,7 @@
     <th>内容</th>
     <th>期限</th>
     <th>ステータス</th>
+    <th>優先順位</th>
     <th>詳細</th>
     <th>編集</th>
     <th>削除</th>
@@ -30,6 +34,7 @@
           <td><%= form.content %></td>
           <td><%= form.endtime_at %></td>
           <td><%= form.status %></td>
+          <td><%= form.priority %></td>
           <td><%= link_to '詳細', task_path(form.id) %></td>
           <td><%= link_to '編集', edit_task_path(form.id) %></td>
           <td><%= link_to '削除', task_path(form.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>

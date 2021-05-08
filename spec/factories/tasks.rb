@@ -5,6 +5,7 @@ FactoryBot.define do
     content {'コンテント'}
     endtime_at {'002020-10-06'}
     status { 1 }
+    priority { 1 }
   end
   factory :task2,class: Task do
     daytime {'002020-10-07'}
@@ -12,6 +13,7 @@ FactoryBot.define do
     content {'コンテント2'}
     endtime_at {'002020-10-06'}
     status { 2 }
+    priority { 2 }
   end
   factory :task3,class: Task do
     daytime {'002020-10-08'}
@@ -19,5 +21,6 @@ FactoryBot.define do
     content {'コンテント3'}
     endtime_at {'002020-10-06'}
     status { 3 }
+    priority { 3 }
   end
 end

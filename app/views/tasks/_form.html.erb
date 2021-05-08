@@ -28,6 +28,8 @@
   <br>
   <%= form.select :status,  Task.statuses.keys %>
   <br>
+  <%= form.select :priority,  Task.priorities.keys %>
+  <br>
   <% if action_name == 'new' %>
   <%= form.submit '投稿する' %>
   <% else %>
