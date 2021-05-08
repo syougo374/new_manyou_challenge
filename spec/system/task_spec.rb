@@ -75,7 +75,19 @@ RSpec.describe 'タスク管理機能', type: :system do
       click_button '検索' 
       task_search = all('.task_row')
       expect(task_search[0]).to have_content '着手'
-
+    end
+  end
+  context 'ステータス、タイトル両方検索された場合' do
+    it '双方にマッチした内容のみを表示すること' do
+      FactoryBot.create(:task2, title:'task2',content: 'bbb',daytime:'002020-10-08',endtime_at:'002020-10-06',status: 1)
+      visit tasks_path
+      fill_in 'search_title', with: 'task2'
+      find("#search_status").find("option[value='着手']").select_option
+      click_button '検索'
+      status_title_search = all('.task_row')
+      expect(status_title_search[0]).to have_content '着手'
+      expect(status_title_search[0]).to have_content 'task2'
+      expect(page).not_to have_content 'task1'
     end
   end
 end
