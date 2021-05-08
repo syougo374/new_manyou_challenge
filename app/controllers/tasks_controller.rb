@@ -5,23 +5,23 @@ class TasksController < ApplicationController
   def index
     # @tasks = Task.all.order(params[:sort_expired])
     if params[:sort_expired]
-      @tasks = Task.all.order(endtime_at: :desc)   
+      @tasks = Task.all.order(endtime_at: :desc).page(params[:page]).per(5)  
     elsif params[:sort_priority] 
-      @tasks = Task.all.order(priority: :desc)
+      @tasks = Task.all.order(priority: :desc).page(params[:page]).per(5)
     elsif params[:search]
       if params[:search_title].present? && params[:search_status].present?
         @tasks = Task.search_title(params[:search_title]).search_status(params[:search_status])
       elsif params[:search_title].present?
-        @tasks = Task.search_title(params[:search_title])
+        @tasks = Task.search_title(params[:search_title]).page(params[:page]).per(3)
       elsif params[:search_status].present?
-        @tasks = Task.search_status(params[:search_status])
+        @tasks = Task.search_status(params[:search_status]).page(params[:page]).per(3)
       elsif params[:search_priority].present?
-        @tasks = Task.search_priority(params[:search_priority])
+        @tasks = Task.search_priority(params[:search_priority])#.page(params[:page]).per(3)
       else
-        @tasks = Task.all.order(id: :desc)
+        @tasks = Task.all.order(id: :desc).page(params[:page]).per(3)
       end
     else
-      @tasks = Task.all.order(id: :desc)
+      @tasks = Task.all.order(id: :desc).page(params[:page]).per(3)
     end
   end
 
