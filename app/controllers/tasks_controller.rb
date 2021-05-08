@@ -3,9 +3,13 @@ class TasksController < ApplicationController
   # before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def index
-    @tasks = Task.all
-    
+    # @tasks = Task.all.order(params[:sort_expired])
+    if params[:sort_expired]
 
+      @tasks = Task.all.order(endtime_at: :desc)    
+    else 
+      @tasks = Task.all.order(id: :desc)
+    end
   end
 
   def new
@@ -52,8 +56,9 @@ class TasksController < ApplicationController
   def set_task
     @task = Task.find(params[:id])
   end
+
   def task_params
-    params.require(:task).permit(:title,:content,:daytime,:endtime_at,:factory)
+    params.require(:task).permit(:title,:content,:daytime,:endtime_at,:status)
   end
 
 end
