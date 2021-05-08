@@ -1,8 +1,8 @@
 require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
-  let!(:task) { FactoryBot.create(:task, title:'task',content: 'aaa',daytime:'002020-10-08',endtime_at:'002020-10-07')}
-  let!(:task2) { FactoryBot.create(:task2, title:'task2',content: 'bbb',daytime:'002020-10-08',endtime_at:'002020-10-06')}
-  let!(:task3) { FactoryBot.create(:task3, title:'task3',content: 'ccc',daytime:'002020-10-08',endtime_at:'002020-10-10')}
+  let!(:task) { FactoryBot.create(:task, title:'task',content: 'aaa',daytime:'002020-10-08',endtime_at:'002020-10-07',status: 1)}
+  let!(:task2) { FactoryBot.create(:task2, title:'task2',content: 'bbb',daytime:'002020-10-08',endtime_at:'002020-10-06',status: 2)}
+  let!(:task3) { FactoryBot.create(:task3, title:'task3',content: 'ccc',daytime:'002020-10-08',endtime_at:'002020-10-10',status: 3)}
   describe '新規作成機能' do
     context 'タスクを新規作成した場合' do
       it '作成したタスクが表示される' do
@@ -11,6 +11,8 @@ RSpec.describe 'タスク管理機能', type: :system do
         fill_in 'task[title]', with: 'test_task55'
         # binding.irb
         fill_in 'task[content]', with: 'content_test55'
+        # fill_in 'task[statuses_keys]', select: 1
+        find("#task_status").find("option[value='着手']").select_option
         # fill_in 'task[endtime_at]', with: '002020-10-01'
         click_button '投稿する'
         # task = FactoryBot.create(:task,title: 'task')
@@ -18,6 +20,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         # expect(page).to have_content '002020-10-07'
         expect(page).to have_content 'test_task55'
         expect(page).to have_content 'content_test55'
+        expect(page).to have_content '着手'
       end
     end
   end

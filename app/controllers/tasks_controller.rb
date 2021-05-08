@@ -13,6 +13,8 @@ class TasksController < ApplicationController
         @tasks = Task.search_title(params[:search_title])
       elsif params[:search_status].present?
         @tasks = Task.search_status(params[:search_status])
+      else
+        @tasks = Task.all.order(id: :desc)
       end
     else
       @tasks = Task.all.order(id: :desc)
@@ -70,6 +72,7 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).permit(:title,:content,:daytime,:endtime_at,:status)
+    
   end
 
 end
