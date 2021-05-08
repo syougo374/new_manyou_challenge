@@ -70,7 +70,14 @@ RSpec.describe 'タスク管理機能', type: :system do
   end
   context 'status検索をかけた場合' do
     it '指定したstatusが表示されること' do
-      
+      visit tasks_path
+      find("#search_status").find("option[value='着手']").select_option
+      click_button '検索' 
+      task_search = all('.task_row')
+      expect(task_search[0]).to have_content '着手'
+
+    end
+  end
 end
   describe '詳細表示機能' do
      context '任意のタスク詳細画面に遷移した場合' do
