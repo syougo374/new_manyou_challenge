@@ -57,11 +57,25 @@ RSpec.describe 'タスク管理機能', type: :system do
       expect(task_list[1]).to have_content '2020-10-07'
     end
    end
+ end
+ describe '検索機能' do
+   context 'タイトルで検索をかけた場合' do
+    it '指定したタイトルのが表示されていること' do
+      visit tasks_path
+      fill_in 'search_title', with: 'task2'
+      click_button '検索' 
+      task_search = all('.task_row')
+      expect(task_search[0]).to have_content 'task2'
+    end
   end
+  context 'status検索をかけた場合' do
+    it '指定したstatusが表示されること' do
+      
+end
   describe '詳細表示機能' do
      context '任意のタスク詳細画面に遷移した場合' do
        it '該当タスクの内容が表示される' do
-        task = FactoryBot.create(:task,title: 'task_詳細',content: 'content_詳細')
+        # task = FactoryBot.create(:task,title: 'task_詳細',content: 'content_詳細')
         visit task_path(task.id)
         expect(task).to be_valid
        end
