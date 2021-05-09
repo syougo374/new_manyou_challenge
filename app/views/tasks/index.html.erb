@@ -43,3 +43,6 @@
   </tbody>
 </table>
 <%= link_to 'タスクを追加する', new_task_path %>
+<div class="pagination_block">
+    <%= paginate @tasks %>
+</div>

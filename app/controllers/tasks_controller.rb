@@ -5,7 +5,7 @@ class TasksController < ApplicationController
   def index
     # @tasks = Task.all.order(params[:sort_expired])
     if params[:sort_expired]
-      @tasks = Task.all.order(endtime_at: :desc).page(params[:page]).per(5)  
+      @tasks = Kaminari.paginate_array(Task.all.order(endtime_at: :desc)).page(params[:page]).per(5)  
     elsif params[:sort_priority] 
       @tasks = Task.all.order(priority: :desc).page(params[:page]).per(5)
     elsif params[:search]
@@ -18,10 +18,10 @@ class TasksController < ApplicationController
       elsif params[:search_priority].present?
         @tasks = Task.search_priority(params[:search_priority])#.page(params[:page]).per(3)
       else
-        @tasks = Task.all.order(id: :desc).page(params[:page]).per(3)
+        @tasks = Kaminari.paginate_array(Task.all.order(id: :desc)).page(params[:page]).per(3)
       end
     else
-      @tasks = Task.all.order(id: :desc).page(params[:page]).per(3)
+      @tasks = Kaminari.paginate_array(Task.all.order(id: :desc)).page(params[:page]).per(3)
     end
   end
 
