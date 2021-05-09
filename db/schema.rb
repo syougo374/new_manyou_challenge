@@ -19,6 +19,9 @@ ActiveRecord::Schema.define(version: 2021_04_30_043825) do
     t.string "title"
     t.text "content"
     t.datetime "daytime"
+    t.date "endtime_at"
+    t.integer "priority", default: 1, null: false
+    t.integer "status", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

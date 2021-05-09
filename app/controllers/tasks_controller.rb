@@ -3,13 +3,41 @@ class TasksController < ApplicationController
   # before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def index
-    @tasks = Task.all
-    
+    # @tasks = Task.all.order(params[:sort_expired])
+    if params[:sort_expired]
+      @tasks = Kaminari.paginate_array(Task.all.order(endtime_at: :desc)).page(params[:page]).per(3)  
 
+    elsif params[:sort_priority] 
+      @tasks = Kaminari.paginate_array(Task.all.order(priority: :desc)).page(params[:page]).per(3)
+
+    elsif params[:search]
+      if params[:search_title].present? && params[:search_status].present?
+        @tasks = Kaminari.paginate_array(Task.search_title(params[:search_title]).search_status(params[:search_status])).page(params[:page]).per(3)
+
+      elsif params[:search_title].present?
+        @tasks = Kaminari.paginate_array(Task.search_title(params[:search_title])).page(params[:page]).per(3)
+
+      elsif params[:search_status].present?
+        @tasks = Kaminari.paginate_array(Task.search_status(params[:search_status])).page(params[:page]).per(3)
+
+      elsif params[:search_priority].present?
+        @tasks = Kaminari.paginate_array(Task.search_priority(params[:search_priority])).page(params[:page]).per(3)
+
+      else
+        @tasks = Kaminari.paginate_array(Task.all.order(id: :desc)).page(params[:page]).per(3)
+      end
+      
+    else
+      @tasks = Kaminari.paginate_array(Task.all.order(id: :desc)).page(params[:page]).per(3)
+    end
   end
 
   def new
     @task = Task.new
+  end
+  def self.search(search)
+    return Task.all unless search
+    Task.where(['title LIKE ?', "%#{search}%"])
   end
 
   def create
@@ -52,8 +80,10 @@ class TasksController < ApplicationController
   def set_task
     @task = Task.find(params[:id])
   end
+
   def task_params
-    params.require(:task).permit(:title,:content,:daytime)
+    params.require(:task).permit(:title,:content,:daytime,:endtime_at,:status,:priority)
+    
   end
 
 end
