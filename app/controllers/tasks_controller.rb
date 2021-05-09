@@ -5,21 +5,28 @@ class TasksController < ApplicationController
   def index
     # @tasks = Task.all.order(params[:sort_expired])
     if params[:sort_expired]
-      @tasks = Kaminari.paginate_array(Task.all.order(endtime_at: :desc)).page(params[:page]).per(5)  
+      @tasks = Kaminari.paginate_array(Task.all.order(endtime_at: :desc)).page(params[:page]).per(3)  
+
     elsif params[:sort_priority] 
-      @tasks = Task.all.order(priority: :desc).page(params[:page]).per(5)
+      @tasks = Kaminari.paginate_array(Task.all.order(priority: :desc)).page(params[:page]).per(3)
+
     elsif params[:search]
       if params[:search_title].present? && params[:search_status].present?
-        @tasks = Task.search_title(params[:search_title]).search_status(params[:search_status])
+        @tasks = Kaminari.paginate_array(Task.search_title(params[:search_title]).search_status(params[:search_status])).page(params[:page]).per(3)
+
       elsif params[:search_title].present?
-        @tasks = Task.search_title(params[:search_title]).page(params[:page]).per(3)
+        @tasks = Kaminari.paginate_array(Task.search_title(params[:search_title])).page(params[:page]).per(3)
+
       elsif params[:search_status].present?
-        @tasks = Task.search_status(params[:search_status]).page(params[:page]).per(3)
+        @tasks = Kaminari.paginate_array(Task.search_status(params[:search_status])).page(params[:page]).per(3)
+
       elsif params[:search_priority].present?
-        @tasks = Task.search_priority(params[:search_priority])#.page(params[:page]).per(3)
+        @tasks = Kaminari.paginate_array(Task.search_priority(params[:search_priority])).page(params[:page]).per(3)
+
       else
         @tasks = Kaminari.paginate_array(Task.all.order(id: :desc)).page(params[:page]).per(3)
       end
+      
     else
       @tasks = Kaminari.paginate_array(Task.all.order(id: :desc)).page(params[:page]).per(3)
     end

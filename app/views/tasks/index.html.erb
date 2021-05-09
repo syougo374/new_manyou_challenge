@@ -1,19 +1,27 @@
 <h1>タスク一覧</h1>
+<div class = "navgation">
 <%= link_to '期限並び替え', tasks_path(sort_expired: "true") %>
 <%= link_to '優先順位で並び替え', tasks_path(sort_priority: "true") %>
- <div class="search_box" >
-      <%= form_with(local: true, method: :get, url: tasks_path ) do |form| %>
-        <p class="input"><%= form.label :search_title, "タスク名" %>
-        <%= form.text_field :search_title, placeholder: "タスク名で検索" %></p>
-        <p class="input"><%= form.label :search_status, "ステータス" %>
-        <%= form.select :search_status, Task.statuses.keys, { include_blank: '選択してください'} %></p>
-        <p class="input"><%= form.label :search_priority, "優先順位" %>
-        <%= form.select :search_priority, Task.priorities.keys, { include_blank: '選択してください'} %></p>
-        <p class="input"><%= form.submit "検索", name: "search" %></p>
-      <% end %>
-    </div>
+</div>
+<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+検索ボックス <span class="caret"></span><ul class="dropdown-menu">
+<div class="search_box" >
+<%= form_with(local: true, method: :get, url: tasks_path ) do |form| %>
+  <p class="input"><%= form.label :search_title, "タスク名" %>
+  <%= form.text_field :search_title, placeholder: "タスク名で検索" %></p>
+  <p class="input"><%= form.label :search_status, "ステータス" %>
+  <%= form.select :search_status, Task.statuses.keys, { include_blank: '選択してください'} %></p>
+  <p class="input"><%= form.label :search_priority, "優先順位" %>
+  <%= form.select :search_priority, Task.priorities.keys, { include_blank: '選択してください'} %></p>
+  <p class="input"><%= form.submit "検索", name: "search" %></p>
+  <% end %>
+  </div>
+  </ul>
+  </button>
+ 
+  
 
-<table border = '1'>
+<table border = '1' class = "task_table">
   <thead>
     <th>日時</th>
     <th>タイトル</th>
@@ -42,7 +50,12 @@
     <% end %>
   </tbody>
 </table>
-<%= link_to 'タスクを追加する', new_task_path %>
+<div class = "new_task_btn">
+<button type="button" class="btn btn-default navbar-btn"><%= link_to 'タスクを追加する', new_task_path %></button>
+</div>
+<%#= link_to 'タスクを追加する', new_task_path %>
 <div class="pagination_block">
     <%= paginate @tasks %>
 </div>
+
+

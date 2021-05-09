@@ -1,6 +1,9 @@
 // Place all the styles related to the tasks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+body {
+  background-color: rgb(255, 241, 202);
+}
 .pagination_block {
   text-align: center;
 }
@@ -17,3 +20,27 @@
 .last {
   margin: 5px;
 }
+// .btn .btn-default .dropdown-toggle {
+
+// }
+.navgation a {
+  color: red;
+  text-decoration: none;
+}
+
+// .btn .btn-default .navbar-btn {
+// }
+
+.new_task_btn a {
+  text-decoration: none;
+  color: rgb(11, 251, 231);
+
+}
+
+.task_table {
+  background-color: #ffffff;
+}
+ h1 {
+   color: orange;
+   font-family:Georgia, 'Times New Roman', Times, serif;
+ }
