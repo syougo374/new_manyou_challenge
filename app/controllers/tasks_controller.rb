@@ -29,6 +29,7 @@ class TasksController < ApplicationController
       
     else
       @tasks = Kaminari.paginate_array(current_user.tasks.order(id: :desc)).page(params[:page]).per(3)
+      # binding.pry
     end
   end
 
@@ -41,8 +42,10 @@ class TasksController < ApplicationController
   end
 
   def create
-    # @task = current_user.tasks.build(task_params)
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
+    # @task = Task.new(task_params)
+    # if params[:back]
+    #    render :new
     if @task.save
       # @task = current_user.tasks.build(picture_params)
       redirect_to tasks_path, notice: 'タスクを投稿しました'

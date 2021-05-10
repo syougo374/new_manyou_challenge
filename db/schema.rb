@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2021_05_09_175335) do
     t.string "title"
     t.text "content"
     t.datetime "daytime"
-    t.date "endtime_at"
+    t.datetime "endtime_at"
     t.integer "priority", default: 1, null: false
     t.integer "status", default: 1, null: false
     t.datetime "created_at", null: false
