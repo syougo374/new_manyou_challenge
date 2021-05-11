@@ -19,6 +19,7 @@
     <br>
     <%= f.email_field :email, placeholder: "your email" %>
     <br>
+    <%# if action_name == 'new' %>
     <%= f.label :password %>
     <br>
     <%= f.password_field :password, placeholder: "password" %>
@@ -26,6 +27,7 @@
     <%= f.label :password_confirmation %>
     <br>
     <%= f.password_field :password_confirmation, placeholder: "type same password" %>
+    <%# end %>
     <br>
     <%= f.label :admin %>
     <br>

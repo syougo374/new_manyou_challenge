@@ -47,7 +47,16 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+#   def user_admin
+#     @users = User.all
+#     if  current_user.admin == false
+#         redirect_to root_path
+#     else
+#         render action: "index"
+#     end
+#  end
+
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:admin,:name, :email, :password, :password_confirmation)
   end
 end

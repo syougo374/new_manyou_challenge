@@ -30,6 +30,8 @@
   <br>
   <%= form.select :priority,  Task.priorities.keys %>
   <br>
+  
+  <br>
   <% if action_name == 'new' %>
   <%= form.submit '投稿する' %>
   <% else %>
