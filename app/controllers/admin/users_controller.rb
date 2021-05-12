@@ -1,5 +1,5 @@
 class Admin::UsersController < ApplicationController
-  skip_before_action :login_required, only: [:new, :create]
+  # skip_before_action :login_required, only: [:new, :create]
   before_action :set_user,only: [:edit,:update,:destroy, :show]
   before_action :not_admin
   def index
@@ -25,8 +25,12 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy
-    redirect_to admin_users_path, notice: '管理者を排除しました'
+    # binding.pry
+    if @user.destroy
+      redirect_to admin_users_path, notice: '管理者を排除しました'
+    else
+      redirect_to admin_users_path, notice: '管理者は一人いないといけん'
+    end
   end
 
   def update
@@ -41,6 +45,7 @@ class Admin::UsersController < ApplicationController
   end
 
   private
+
   def set_user
     @user = User.find(params[:id])
   end

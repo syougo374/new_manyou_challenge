@@ -24,6 +24,11 @@ class UsersController < ApplicationController
     end
   end
 
+  # def show 
+  #   if @user.id != current_user.id
+  #     redirect_to tasks_path
+  #   end
+  # end
   # def edit
   #   @user = User.find(params[:id])
   # end

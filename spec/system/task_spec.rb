@@ -1,15 +1,31 @@
 require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
+  let!(:user) {FactoryBot.create(:user,name:'鶴野',email:'syougo@docomo.ne.jp',password:'password',admin:'管理者')}
   let!(:task) { FactoryBot.create(:task, title:'task',content: 'aaa',daytime:'002020-10-08',endtime_at:'002020-10-07',status: 1, priority: 1)}
   let!(:task2) { FactoryBot.create(:task2, title:'task2',content: 'bbb',daytime:'002020-10-08',endtime_at:'002020-10-06',status: 2, priority: 3)}
   let!(:task3) { FactoryBot.create(:task3, title:'task3',content: 'ccc',daytime:'002020-10-08',endtime_at:'002020-10-10',status: 3, priority: 2)}
+  before do
+    visit new_user_path
+    expect(new_user_path).to eq new_user_path
+    fill_in 'user[name]',with: 'つる'
+    fill_in 'user[email]',with: 'turu@docomo.ne.jp'
+    fill_in 'user[password]',with: 'password'
+    fill_in 'user[password_confirmation]',with: 'password'
+    click_button 'アカウント作成'
+    visit user_path(@user.id)
+    expect(user_path(@user.id)).to eq user_path(user.id)
+    expect(page).to have_content 'つる'
+    expect(page).to have_content 'turu@docomo.ne.jp'
+    # expect(page).to have_content 'password'
+  end
+
   describe '新規作成機能' do
     context 'タスクを新規作成した場合' do
       it '作成したタスクが表示される' do
         visit new_task_path
         fill_in 'task[daytime]',with: '002020-10-07'
         fill_in 'task[title]', with: 'test_task55'
-        # binding.irb
+        binding.irb
         fill_in 'task[content]', with: 'content_test55'
         # fill_in 'task[statuses_keys]', select: 1
         find("#task_status").find("option[value='着手']").select_option
@@ -61,6 +77,7 @@ RSpec.describe 'タスク管理機能', type: :system do
    end
    context '優先順位が高い順に並んでいる場合' do
     it '優先順位の高い順に並んでいること' do
+
       visit tasks_path
       click_on '優先順位で並び替え'
       sleep(0.5)
