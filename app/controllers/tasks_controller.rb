@@ -8,27 +8,28 @@ class TasksController < ApplicationController
       @tasks = Kaminari.paginate_array(Task.all.order(endtime_at: :desc)).page(params[:page]).per(3)  
 
     elsif params[:sort_priority] 
-      @tasks = Kaminari.paginate_array(Task.all.order(priority: :desc)).page(params[:page]).per(3)
+      @tasks = Kaminari.paginate_array(current_user.tasks.order(priority: :desc)).page(params[:page]).per(3)
 
     elsif params[:search]
       if params[:search_title].present? && params[:search_status].present?
-        @tasks = Kaminari.paginate_array(Task.search_title(params[:search_title]).search_status(params[:search_status])).page(params[:page]).per(3)
+        @tasks = Kaminari.paginate_array(current_user.tasks.search_title(params[:search_title]).search_status(params[:search_status])).page(params[:page]).per(3)
 
       elsif params[:search_title].present?
-        @tasks = Kaminari.paginate_array(Task.search_title(params[:search_title])).page(params[:page]).per(3)
+        @tasks = Kaminari.paginate_array(current_user.tasks.search_title(params[:search_title])).page(params[:page]).per(3)
 
       elsif params[:search_status].present?
-        @tasks = Kaminari.paginate_array(Task.search_status(params[:search_status])).page(params[:page]).per(3)
+        @tasks = Kaminari.paginate_array(current_user.tasks.search_status(params[:search_status])).page(params[:page]).per(3)
 
       elsif params[:search_priority].present?
-        @tasks = Kaminari.paginate_array(Task.search_priority(params[:search_priority])).page(params[:page]).per(3)
+        @tasks = Kaminari.paginate_array(current_user.tasks.search_priority(params[:search_priority])).page(params[:page]).per(3)
 
       else
-        @tasks = Kaminari.paginate_array(Task.all.order(id: :desc)).page(params[:page]).per(3)
+        @tasks = Kaminari.paginate_array(current_user.tasks.order(id: :desc)).page(params[:page]).per(3)
       end
       
     else
-      @tasks = Kaminari.paginate_array(Task.all.order(id: :desc)).page(params[:page]).per(3)
+      @tasks = Kaminari.paginate_array(current_user.tasks.order(id: :desc)).page(params[:page]).per(3)
+      # binding.pry
     end
   end
 
@@ -41,8 +42,10 @@ class TasksController < ApplicationController
   end
 
   def create
-    # @task = current_user.tasks.build(task_params)
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
+    # @task = Task.new(task_params)
+    # if params[:back]
+    #    render :new
     if @task.save
       # @task = current_user.tasks.build(picture_params)
       redirect_to tasks_path, notice: 'タスクを投稿しました'

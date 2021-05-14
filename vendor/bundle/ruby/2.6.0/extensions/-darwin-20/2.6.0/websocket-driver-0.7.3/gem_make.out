@@ -1,0 +1,15 @@
+current directory: /Users/syougo/workspace/manyou_challenge/vendor/bundle/ruby/2.6.0/gems/websocket-driver-0.7.3/ext/websocket-driver
+/Users/syougo/.rbenv/versions/2.6.5/bin/ruby -I /Users/syougo/.rbenv/versions/2.6.5/lib/ruby/2.6.0 -r ./siteconf20210513-45451-1bvj4k5.rb extconf.rb
+creating Makefile
+
+current directory: /Users/syougo/workspace/manyou_challenge/vendor/bundle/ruby/2.6.0/gems/websocket-driver-0.7.3/ext/websocket-driver
+make "DESTDIR=" clean
+
+current directory: /Users/syougo/workspace/manyou_challenge/vendor/bundle/ruby/2.6.0/gems/websocket-driver-0.7.3/ext/websocket-driver
+make "DESTDIR="
+compiling websocket_mask.c
+linking shared-object websocket_mask.bundle
+
+current directory: /Users/syougo/workspace/manyou_challenge/vendor/bundle/ruby/2.6.0/gems/websocket-driver-0.7.3/ext/websocket-driver
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 websocket_mask.bundle ./.gem.20210513-45451-169iii1
