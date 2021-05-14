@@ -113,8 +113,8 @@ RSpec.describe 'ユーザー管理機能', type: :system do
         fill_in 'session[password]',with: 'password'
         click_button 'Log in'
         click_button '管理者画面へ'
-        first('tr td:nth-child(3)').click
         # binding.irb
+        first('tr td:nth-child(3)').click
         expect(page).to have_content '鶴野のMyページ'
       end
       it '管理者は他の人を編集できる' do
